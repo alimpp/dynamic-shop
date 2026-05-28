@@ -38,6 +38,7 @@
 import { routes } from "../../../consts/admin";
 
 const emit = defineEmits(["openSidebar"]);
+
 const props = defineProps({
   sidebarState: { type: Boolean },
 });
@@ -53,8 +54,8 @@ const handleOpenChild = (route) => {
 
 <style scoped>
 .routes-content {
-  height: 80dvh;
-  overflow-y: scroll;
+  height: 85vh;
+  overflow-y: auto;
 }
 .routes-content::-webkit-scrollbar {
   display: none;

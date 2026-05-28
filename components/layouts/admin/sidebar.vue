@@ -1,42 +1,50 @@
 <template>
   <div
-    class="sidebar-content h-95-dvh flex flex-column"
-    :class="{ 'w-250-px': isOpen, 'w-50-px': !isOpen }"
+    class="sidebar-content flex flex-column"
+    :class="{ 'w-250-px': isOpen, 'w-70-px': !isOpen }"
   >
-    <div class="logo-content flex align-center justify-center">
-      <img src="/public/logo/logo.png" alt="logo" width="100" />
+    <div class="logo-content flex align-center h-60-px">
+      <div
+        class="w-50 flex px-10"
+        :class="{ 'w-50-px': !isOpen, 'justify-center align-center': !isOpen }"
+      >
+        <img src="/public/logo/logo.png" alt="logo" width="100" />
+      </div>
+      <div class="w-50 flex justify-end" v-if="isOpen">
+        <BaseIcon
+          name="arrow-left"
+          class="mx-10 cursor-pointer"
+          v-if="isOpen"
+          @click="handleChangeSidebarState(false)"
+        />
+      </div>
     </div>
     <div class="routes-content flex flex-column">
       <LayoutsAdminRoutesContent
         :sidebarState="isOpen"
-        @openSidebar="isOpen = true"
-      />
-    </div>
-    <div class="w-100 flex justify-end" :class="{ 'justify-center': !isOpen }">
-      <BaseIcon
-        name="arrow-left"
-        class="mx-10 cursor-pointer"
-        v-if="isOpen"
-        @click="isOpen = !isOpen"
-      />
-      <BaseIcon
-        name="arrow-left"
-        class="mx-10 cursor-pointer"
-        v-else
-        @click="isOpen = !isOpen"
+        @openSidebar="handleChangeSidebarState(true)"
       />
     </div>
   </div>
 </template>
 
 <script setup>
-const isOpen = ref(false);
+const emit = defineEmits(["handleChangeSidebarState"]);
+
+const props = defineProps({
+  isOpen: { type: Boolean },
+});
+
+const handleChangeSidebarState = (val) => {
+  emit("handleChangeSidebarState", val);
+};
 </script>
 
 <style scoped>
 .sidebar-content {
-  border: 1px solid #00000016;
-  border-radius: 10px;
-  transition: 0.2s;
+  height: 100vh;
+  overflow: hidden;
+  background: #303030;
+  color: #fff;
 }
 </style>
