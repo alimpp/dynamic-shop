@@ -1,21 +1,34 @@
 <template>
-  <div
-    class="flex flex-column px-10 mt-10"
-    v-for="route in routes"
-    :key="route.id"
-  >
-    <div class="flex cursor-pointer" @click="route.open = !route.open">
-      <BaseIcon name="arrow-up" v-if="route.open" />
-      <BaseIcon name="arrow-down" v-else />
-      <span class="f-s-15 f-w-600">{{ route.name }}</span>
-    </div>
+  <div class="routes-content">
     <div
-      class="flex flex-column px-25 pt-5"
-      v-for="child in route.childs"
-      v-if="route.open"
+      class="flex flex-column px-10 mt-10"
+      v-for="route in routes"
+      :key="route.id"
     >
-      <div class="flex align-center">
-        <span class="f-s-13 f-w-600 cursor-pointer">{{ child.name }}</span>
+      <div
+        class="flex cursor-pointer"
+        :class="{ 'justify-center': !sidebarState }"
+        @click="handleOpenChild(route)"
+      >
+        <BaseIcon :name="route.icon" size="20" />
+        <div class="w-190-px" v-if="sidebarState">
+          <span class="f-s-15 f-w-600">{{ route.name }}</span>
+        </div>
+        <div v-if="sidebarState">
+          <BaseIcon name="arrow-up" v-if="route.open" />
+          <BaseIcon name="arrow-down" v-else />
+        </div>
+      </div>
+      <div
+        class="flex flex-column px-20 pt-5 fade-animation"
+        v-for="child in route.childs"
+        v-if="route.open && sidebarState"
+        style="color: #505050"
+      >
+        <div class="flex align-center">
+          <BaseIcon name="dot" />
+          <span class="f-s-13 f-w-600 cursor-pointer">{{ child.name }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -23,4 +36,27 @@
 
 <script setup>
 import { routes } from "../../../consts/admin";
+
+const emit = defineEmits(["openSidebar"]);
+const props = defineProps({
+  sidebarState: { type: Boolean },
+});
+
+const handleOpenChild = (route) => {
+  const target = routes.value.find((item) => {
+    return item.id == route.id;
+  });
+  target.open = !target.open;
+  emit("openSidebar");
+};
 </script>
+
+<style scoped>
+.routes-content {
+  height: 80dvh;
+  overflow-y: scroll;
+}
+.routes-content::-webkit-scrollbar {
+  display: none;
+}
+</style>

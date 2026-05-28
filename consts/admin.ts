@@ -3,6 +3,7 @@ import { ref } from "vue";
 export const routes = ref([
   {
     id: 0,
+    icon: "dashboard",
     name: "Dashboard",
     open: false,
     childs: [
@@ -15,6 +16,7 @@ export const routes = ref([
   },
   {
     id: 1,
+    icon: "styles",
     name: "Styles",
     open: false,
     childs: [
@@ -32,6 +34,7 @@ export const routes = ref([
   },
   {
     id: 2,
+    icon: "cms",
     name: "Cms",
     open: false,
     childs: [
