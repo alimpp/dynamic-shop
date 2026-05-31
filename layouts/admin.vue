@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-container">
+  <div class="layout-container" :dir="locale == 'fa' ? 'rtl' : 'ltr'">
     <div class="sidebar-container">
       <LayoutsAdminSidebar
         :isOpen="sidebarState"
@@ -22,6 +22,9 @@
 </template>
 
 <script setup>
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+
 const sidebarState = ref(true);
 const hiddenState = ref(true);
 

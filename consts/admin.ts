@@ -35,7 +35,7 @@ export const routes = ref([
   {
     id: 2,
     icon: "cms",
-    name: "Cms",
+    name: "CMS",
     open: false,
     childs: [
       {

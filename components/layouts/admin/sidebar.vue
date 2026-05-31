@@ -16,9 +16,15 @@
       </div>
       <div class="w-50 flex justify-end" v-if="isOpen">
         <BaseIcon
+          name="arrow-right"
+          class="mx-10 cursor-pointer desktop-icon"
+          v-if="isOpen && locale == 'fa'"
+          @click="handleChangeSidebarState(false)"
+        />
+        <BaseIcon
           name="arrow-left"
           class="mx-10 cursor-pointer desktop-icon"
-          v-if="isOpen"
+          v-if="isOpen && locale == 'en'"
           @click="handleChangeSidebarState(false)"
         />
         <BaseIcon
@@ -38,6 +44,9 @@
 </template>
 
 <script setup>
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+
 const emit = defineEmits(["handleChangeSidebarState", "handleHiddenState"]);
 
 const props = defineProps({

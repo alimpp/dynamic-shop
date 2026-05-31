@@ -12,7 +12,7 @@
       >
         <BaseIcon :name="route.icon" size="20" />
         <div class="w-100" v-if="sidebarState">
-          <span class="f-s-15 f-w-600">{{ route.name }}</span>
+          <span class="f-s-15 f-w-600 px-3">{{ $t(route.name) }}</span>
         </div>
         <div v-if="sidebarState">
           <BaseIcon name="arrow-up" v-if="route.open" />
@@ -26,7 +26,9 @@
       >
         <div class="flex align-center">
           <BaseIcon name="dot" />
-          <span class="f-s-13 f-w-600 cursor-pointer">{{ child.name }}</span>
+          <span class="f-s-13 f-w-600 cursor-pointer">{{
+            $t(child.name)
+          }}</span>
         </div>
       </div>
     </div>
@@ -56,7 +58,7 @@ const handleOpenChild = (route) => {
   height: 85vh;
   overflow-y: auto;
 }
-.children-style{
+.children-style {
   color: #dbd3d3;
 }
 .routes-content::-webkit-scrollbar {
