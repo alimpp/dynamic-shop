@@ -164,10 +164,9 @@ const svgContent = computed<string | null>(() => {
   height: 100%;
 }
 
-/* استایل برای زمانی که آیکون پیدا نمی‌شود */
 .icon-error {
   color: red;
   font-size: 0.8em;
-  display: inline-block; /* اطمینان از نمایش */
+  display: inline-block;
 }
 </style>
